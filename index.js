@@ -1,14 +1,16 @@
 const dob=document.getElementById("dob");
-dob.addEventListener("input",()=>validate(dob));
+dob.addEventListener("input",()=>validate(dob.value));
 function validate(element){
-    const currentYear=new Date().getFullYear();
-    const age=currentYear-dob.getFullYear();
+    const currentYear=new Date();
+    const year=new Date(element);
 
-    if(!(age>=18 && age<=55)){
-        element.setCustomValidity("Age should be between 18 and 55.");
-        element.reportValidity();
+    const age=currentYear.getFullYear()-year.getFullYear();
+
+    if(age<18 || age>55){
+        dob.setCustomValidity("Age should be between 18 and 55.");
+        dob.reportValidity();
     }else{
-        element.setCustomValidity("");
+        dob.setCustomValidity("");
     }
 }
 
